@@ -1,43 +1,76 @@
 package sudoku;
 
-class PuzzleData 
+class PuzzleData
 {
 
-    public enum PuzzleDifficulty { EMPTY         ( "Empty"          ),
-                                   EASY          ( "Easy"           ),
-                                   MEDIUM        ( "Medium"         ),
-                                   HARD          ( "Hard"           ),
-                                   EVIL          ( "Evil"           ),
-                                   EASTER_MONSTER( "Easter Monster" );
-
-    private String strValue;
-
-    PuzzleDifficulty ( String strValue )
+    //
+    // Return initial puzzle data associated with given PuzzleDifficulty.
+    //
+    public static int[][] getPuzzleData( PuzzleDifficulty difficulty )
     {
-        this.strValue = strValue;
-    } 
-     
-    public String toString()
-    {
-        return( this.strValue );
-    }
 
-    static public PuzzleDifficulty getValue( String strValue )
-    {
-        // TODO Use Enum.valueOf()
-        for( PuzzleDifficulty difficulty : PuzzleDifficulty.values() )
+        switch( difficulty )
         {
-            if( difficulty.strValue.equals( strValue ) )
-            {
-                return( difficulty );
-            }
-        } 
-        
-        return( null );
-        
+            case EASY:             return( easyValues          );
+            case MEDIUM:           return( mediumValues        );
+            case HARD:             return( hardValues          );
+            case EVIL:             return( evilValues          );
+            case EASTER_MONSTER:   return( easterMonsterValues );
+        }
+
+        return( emptyValues );
+
     }
+
+    //
+    // Enhanced enum class to provide user-friendliness for PuzzleDifficulty
+    //
+    public enum PuzzleDifficulty
+    {
+
+        //
+        // Constructed values with user friendly strings.
+        //
+        EMPTY         ( "Empty"          ),
+        EASY          ( "Easy"           ),
+        MEDIUM        ( "Medium"         ),
+        HARD          ( "Hard"           ),
+        EVIL          ( "Evil"           ),
+        EASTER_MONSTER( "Easter Monster" );
+
+        private String strValue;
+
+        PuzzleDifficulty ( String strValue )
+        {
+            this.strValue = strValue;
+        }
+
+        //
+        // Conversion routines
+        //
+        public String toString()
+        {
+            return( this.strValue );
+        }
+
+        static public PuzzleDifficulty getValue( String strValue )
+                throws IllegalArgumentException
+        {
+
+            for( PuzzleDifficulty difficulty : PuzzleDifficulty.values() )
+            {
+                if( difficulty.strValue.equals( strValue ) )
+                {
+                    return( difficulty );
+                }
+            }
+
+            throw new IllegalArgumentException( "strValue[" + strValue + "] is not a valid PuzzleDifficulty string." );
+
+        }
 
     };
+
 
     //
     // INITIAL PUZZLE DATA
@@ -182,21 +215,5 @@ class PuzzleData
             // |-------------------------------|
             };
 */
-
-    public static int[][] getPuzzleData( PuzzleDifficulty difficulty )
-    {
-
-        switch( difficulty )
-        {
-        case EASY:             return( easyValues          );
-        case MEDIUM:           return( mediumValues        );
-        case HARD:             return( hardValues          );
-        case EVIL:             return( evilValues          );
-        case EASTER_MONSTER:   return( easterMonsterValues );
-        }
-
-        return( emptyValues );
-
-    }
 
 }

@@ -2,6 +2,7 @@ package sudoku;
 
 import java.awt.*;
 import java.util.*;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 import sudoku.Action.ActionType;
@@ -9,11 +10,11 @@ import sudoku.PuzzleData.PuzzleDifficulty;
 
 class SudokuPanel extends JPanel 
 {
-	 
-    /**
-	 * 
-	 */
-	private static final long    serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = SudokuSolver.getLogger();
+
 	protected Dimension          gridCells     = new Dimension( 9, 9 );
 	protected Dimension          superCell     = new Dimension( 3, 3 );
 	private   Cell[][]           gridValues    = new Cell[ gridCells.width ][ gridCells.height ];
@@ -37,7 +38,7 @@ class SudokuPanel extends JPanel
 	private   EnumSet<HintLevel> hintLevel     = EnumSet.noneOf( HintLevel.class );
 	private   boolean            bSingleStep   = false;
 	private   Step               currentStep   = null;
-	private   ArrayList<Step>    solutionSteps = new ArrayList<Step>();
+	private   ArrayList<Step>    solutionSteps = new ArrayList<>();
     private   int                idxHistory    = 0;
     private   SudokuGUI          sudokuGui;
 	
@@ -119,7 +120,8 @@ class SudokuPanel extends JPanel
 		}
 		
 	}
-	
+
+	// TODO -- public statics for true/false
 	public StepType stepSolution( boolean bSolutionStep )
 	{
 		
@@ -132,7 +134,7 @@ class SudokuPanel extends JPanel
 			
 			currentStep = new Step();
 			
-			Main.logger.info( "==== stepSolution(): recording step index[" + idxHistory + "]" );
+			logger.finer( "==== stepSolution(): recording step index[" + idxHistory + "]" );
 			
 			if( hintCell != null )
 			{
@@ -174,7 +176,7 @@ class SudokuPanel extends JPanel
 		if( currentStep != null                               && 
 			stepType    != StepType.NO_POSSIBLE_SOLUTION_STEP  )
 		{
-			Main.logger.info( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
+			logger.finest( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
 		    currentStep.setStepType( stepType );
 		    addStepToSolution( currentStep );
 		}
@@ -510,7 +512,7 @@ class SudokuPanel extends JPanel
 	        		if( possibleValues.equals( cell2.GetPossibleValues() ) )
 	        		{
 		        		identicalPossibleCells.add( cell2 );
-	        			//logger.info( "RowCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
+	        			logger.finer( "RowCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
 	        			break;
 	        		}
 	        	}
@@ -543,7 +545,7 @@ class SudokuPanel extends JPanel
         				{
 	        				if( cell2.removePossibleValue( value ) )
 	        				{
-	    	        			//logger.info( "RowCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
+	    	        			logger.finer( "RowCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
         						currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
 	    	        			rc = true;
 	    	    				if( bSingleStep || !bSolutionStep )
@@ -625,7 +627,7 @@ class SudokuPanel extends JPanel
 	        		if( possibleValues.equals( possibleValues2 ) )
 	        		{
 		        		identicalPossibleCells.add( cell2 );
-	        			//logger.info( "ColCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
+	        			logger.finer( "ColCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
 	        		}
 	        	}
 	        	
@@ -657,7 +659,7 @@ class SudokuPanel extends JPanel
         				{
             				if( cell2.removePossibleValue( value ) )
             				{
-            					//logger.info( "ColCheck: Removed possible value[" + value + "] from cell["+cell2.getCol()+","+cell2.getCol()+"]" );
+            					logger.finer( "ColCheck: Removed possible value[" + value + "] from cell["+cell2.getCol()+","+cell2.getCol()+"]" );
         						currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
                 				rc = true;
                 				if( bSingleStep || !bSolutionStep )
@@ -736,7 +738,7 @@ class SudokuPanel extends JPanel
 	        		if( possibleValues.equals( possibleValues2 ) )
 	        		{
 		        		identicalPossibleCells.add( cell2 );
-	        			//Main.logger.info( "SquareCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
+	        			logger.finer( "SquareCheck: Cell["+cell.getRow()+","+cell.getCol()+"] has the same possible values as cell["+cell2.getRow()+","+cell2.getCol()+"]" );
 	        		}
 	        		
 	        	}  //while( itrRemainingCells.hasNext() )
@@ -770,7 +772,7 @@ class SudokuPanel extends JPanel
         				{
             				if( cell2.removePossibleValue( value ) )
             				{
-            					//logger.info( "SquareCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
+            					logger.finer( "SquareCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
         						currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
                 				rc = true;
                 				if( bSingleStep || !bSolutionStep )
@@ -833,7 +835,7 @@ class SudokuPanel extends JPanel
         if( bCreateStep )
         {
             currentStep = new Step();
-            Main.logger.info( "==== stepSolution(): recording step index[" + idxHistory + "]" );
+            logger.finer( "==== stepSolution(): recording step index[" + idxHistory + "]" );
         }
         
         rc = setCellValue( cell, value, true, HintType.NONE );
@@ -842,7 +844,7 @@ class SudokuPanel extends JPanel
         {
             currentStep.setStepType( StepType.MANUAL_ENTRY_IN_CELL );
             sudokuGui.setLastStrategyText( StepType.MANUAL_ENTRY_IN_CELL.stepString() );
-            //Main.logger.info( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
+            logger.finest( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
             addStepToSolution( currentStep );
             sudokuGui.setButtonEnables();
             currentStep = null;
@@ -864,7 +866,7 @@ class SudokuPanel extends JPanel
 		if( bCreateStep )
 		{
 			currentStep = new Step();
-			Main.logger.info( "==== stepSolution(): recording step index[" + idxHistory + "]" );
+			logger.finer( "==== stepSolution(): recording step index[" + idxHistory + "]" );
 		}
 		
 		rc = setCellValue( cell, value, false, hintType );
@@ -873,7 +875,7 @@ class SudokuPanel extends JPanel
 		{
 		    currentStep.setStepType( StepType.MANUAL_ENTRY_IN_CELL );
             sudokuGui.setLastStrategyText( StepType.MANUAL_ENTRY_IN_CELL.stepString() );
-			//Main.logger.info( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
+			logger.finest( "==== stepSolution(): finished recording step index[" + solutionSteps.size() + "]" );
 			addStepToSolution( currentStep );
 			sudokuGui.setButtonEnables();
 			currentStep = null;
@@ -892,11 +894,11 @@ class SudokuPanel extends JPanel
 		int idxSqRow  = idxRow / superCell.width;
 		int idxSqCol  = idxCol / superCell.height;
 		int idxSquare = idxSqRow * superCell.width + idxSqCol;
-		
-		//Main.logger.info( "setCellValue(): idxRow[" + idxRow + "] idxCol[" + idxCol + "] idxSqRow[" + idxSqRow + "] idxSqCol[" + idxSqCol + "] idxSquare[" + idxSquare + "]" );
-		
+
+		logger.finer( "setCellValue(): idxRow[" + idxRow + "] idxCol[" + idxCol + "] idxSqRow[" + idxSqRow + "] idxSqCol[" + idxSqCol + "] idxSquare[" + idxSquare + "]" );
+
 		if( value != 0                                   &&
-		    ( rowValues[idxRow].contains(value)        || 
+		    ( rowValues[idxRow].contains(value)        ||
 			  colValues[idxCol].contains(value)        ||
 			  squareValues[ idxSquare ].contains(value) ) )
 		{
@@ -910,7 +912,7 @@ class SudokuPanel extends JPanel
     		//
 			if( !bLocked )
 			{
-	    		Main.logger.info( "  setCellValue(): cell[" + idxRow + "][" + idxCol + "] value[" + value + "]" );
+	    		logger.finer( "  setCellValue(): cell[" + idxRow + "][" + idxCol + "] value[" + value + "]" );
 			}
 			cell.setValue( value, currentStep );
 		}
@@ -998,9 +1000,9 @@ class SudokuPanel extends JPanel
         {
             idxHistory--;
             Step step = solutionSteps.get( idxHistory );
-            Main.logger.info( "==== stepBack(): reversing step index[" + idxHistory + "]" );
+            logger.finer( "==== stepBack(): reversing step index[" + idxHistory + "]" );
             step.reverse( this );
-            //Main.logger.info( "==== stepBack(): finished reversing step index[" + idxHistory + "]" );
+            logger.finest( "==== stepBack(): finished reversing step index[" + idxHistory + "]" );
             repaint();
         }
         
@@ -1017,9 +1019,9 @@ class SudokuPanel extends JPanel
         {
             clearFirstDisplayFlags();
             Step step = solutionSteps.get( idxHistory );
-            Main.logger.info( "==== stepForward(): doing step index[" + idxHistory + "]" );
+            logger.finer( "==== stepForward(): doing step index[" + idxHistory + "]" );
             stepType = step.forward( this );
-            //Main.logger.info( "==== stepForward(): finished doing step index[" + idxHistory + "]" );
+            logger.finer( "==== stepForward(): finished doing step index[" + idxHistory + "]" );
             idxHistory++;
             repaint();
         }

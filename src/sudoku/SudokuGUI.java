@@ -10,10 +10,11 @@ import javax.swing.*;
 
 import com.jgoodies.forms.layout.*;
 
+// TODO Fix use of "==" for strings.  Works but is in poor style.
 public class SudokuGUI implements ActionListener, FocusListener
 {
 	
-	Main sudukoMain;
+	SudokuSolver sudokuSolver;
 	
 	private JFrame     frame; 	
 	private GridPanel  topPanel              = new GridPanel();
@@ -42,12 +43,12 @@ public class SudokuGUI implements ActionListener, FocusListener
 		public static int last  () { return( ROW3.ordinal() ); }
 	};
 	
-	public SudokuGUI( Main main  /*, int[][] inputValues */ )
+	public SudokuGUI( SudokuSolver sudokuSolver  /*, int[][] inputValues */ )
 	{
 		
 		super();
 		
-		sudukoMain = main;
+		this.sudokuSolver = sudokuSolver;
 		
 		//1. Create the frame.
 		frame = new JFrame( "Sudoku Solver" );
@@ -109,12 +110,13 @@ public class SudokuGUI implements ActionListener, FocusListener
 	
 	public void actionPerformed( ActionEvent e ) 
 	{
-		
-		if( stepButton.equals( e.getSource() ) ) 
+
+		// TODO -- convert to switch statement
+		if( stepButton.equals( e.getSource() ) )
 		{
 			if( e.getActionCommand() == "Step" )
 			{
-				sudukoMain.Step();
+				sudokuSolver.executeStep();
 				setButtonEnables();
 			}
 			else if( e.getActionCommand() == "Start" )
@@ -129,16 +131,16 @@ public class SudokuGUI implements ActionListener, FocusListener
 		}
 		else if( hintButton.equals( e.getSource() ) )
 		{
-			sudukoMain.Hint();
+			sudokuSolver.displayHint();
 		}
 		else if( backButton.equals( e.getSource() ) )
 		{
-		    sudukoMain.Back();
+		    sudokuSolver.moveBackInHistory();
 		    setButtonEnables();
 		}
         else if( forwardButton.equals( e.getSource() ) )
         {
-            sudukoMain.Forward();
+            sudokuSolver.moveForwardInHistory();
             setButtonEnables();
         }
 		else if( possiblesCheckbox.equals( e.getSource() ))

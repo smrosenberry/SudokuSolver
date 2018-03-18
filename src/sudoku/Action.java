@@ -1,8 +1,12 @@
 package sudoku;
 
+import java.util.logging.Logger;
+
 public class Action
 {
-	
+
+	private static final Logger logger = SudokuSolver.getLogger();
+
 	enum ActionType { SET_VALUE, REMOVE_POSSIBLE_VALUE }
 	
 	Cell       cell;
@@ -23,12 +27,12 @@ public class Action
         {
         
         case SET_VALUE: 
-            //Main.logger.info( "    Action.reverse(): clear cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "]" );
+            logger.finer( "    Action.reverse(): clear cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "]" );
             sudokuPanel.setCellValue( cell, value, false, HintType.NONE );
             break;
             
         case REMOVE_POSSIBLE_VALUE:
-//            Main.logger.info( "    Action.reverse(): restore possible value cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "] value[" + value + "]" );
+            logger.finer( "    Action.reverse(): restore possible value cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "] value[" + value + "]" );
 //            cell.addPossibleValue( value );
             break;
 
@@ -43,12 +47,12 @@ public class Action
 		{
 		
 		case SET_VALUE: 
-			//Main.logger.info( "    Action.reverse(): clear cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "]" );
+			logger.finer( "    Action.reverse(): clear cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "]" );
 			cell.clearValue();
 			break;
 			
 		case REMOVE_POSSIBLE_VALUE:
-			//Main.logger.info( "    Action.reverse(): restore possible value cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "] value[" + value + "]" );
+			logger.finer( "    Action.reverse(): restore possible value cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "] value[" + value + "]" );
 			cell.addPossibleValue( value );
 			break;
 		

@@ -3,6 +3,7 @@ package sudoku;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -10,11 +11,11 @@ import javax.swing.Timer;
 
 class GridPanel extends SudokuPanel implements MouseListener, KeyListener, ActionListener 
 {
-	 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
+
+    private static final Logger logger = SudokuSolver.getLogger();
+
 	private Dimension   panelSize   = new Dimension( 500, 500 );
 	private int         margin      = 25;
 	private Dimension   gridSize    = new Dimension( panelSize.width - 2 * margin, panelSize.height - 2 * margin );
@@ -263,7 +264,7 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
     	}
     	else
     	{
-    		Main.logger.info( "GridPanel.actionPerformed{}: non-timer event" );
+    		logger.finest( "GridPanel.actionPerformed{}: non-timer event" );
     	}
     	
     }
@@ -279,7 +280,7 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
     	//int cellBottom = cellTop + cellSize.height;
     	//int cellRight  = cellLeft + cellSize.width;
 		
-		Main.logger.info( "GridPanel.mouseClicked(): x[" + x + "] y[" + y + "]  idxRow[" + idxRow + "] idxCol[" + idxCol + "]" );
+		logger.finest( "GridPanel.mouseClicked(): x[" + x + "] y[" + y + "]  idxRow[" + idxRow + "] idxCol[" + idxCol + "]" );
 
 		setActiveCell( getCell( idxRow, idxCol ) );
 		
@@ -373,15 +374,15 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
 		
 		char c = keyEvent.getKeyChar();
 		
-		Main.logger.info( "GridPanel.keyTyped(): c[" + c + "]" );
+		logger.finer( "GridPanel.keyTyped(): c[" + c + "]" );
 		
 		if( '1' <= c && c <= '9' )
 		{
-			//logger.info( "GridPanel.keyTyped(): valid numeric key" );
+			logger.finest( "GridPanel.keyTyped(): valid numeric key" );
 			Cell activeCell = getActiveCell();
 			if( activeCell != null )
 			{
-				//logger.info( "GridPanel.keyTyped(): activeCell is valid" );
+				logger.finest( "GridPanel.keyTyped(): activeCell is valid" );
 			    boolean rc;
 				if( bManualInitialization )
 				{

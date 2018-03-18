@@ -3,6 +3,7 @@ package sudoku;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -15,6 +16,9 @@ import sudoku.PuzzleData.PuzzleDifficulty;
 @SuppressWarnings( "serial" )
 public class DlgSelectPuzzle extends JDialog implements ActionListener 
 {
+
+    private static final Logger logger = SudokuSolver.getLogger();
+
     FormLayout         layout  = new FormLayout();
     DefaultFormBuilder builder = new DefaultFormBuilder( layout );
     JPanel             panel   = new JPanel( layout );
@@ -158,7 +162,7 @@ public class DlgSelectPuzzle extends JDialog implements ActionListener
     public void actionPerformed( ActionEvent e ) 
     {
         
-        Main.logger.info( "DlgSelectPuzzle.actionPerformed(): actionCommand[" + e.getActionCommand() + "]" );
+        logger.fine( "DlgSelectPuzzle.actionPerformed(): actionCommand[" + e.getActionCommand() + "]" );
         
         puzzleDifficulty = PuzzleDifficulty.getValue( e.getActionCommand() );
 
@@ -245,9 +249,9 @@ public class DlgSelectPuzzle extends JDialog implements ActionListener
 //        
 ////        if( stepButton.equals( e.getSource() ) ) 
 ////        {
-////            if( e.getActionCommand() == "Step" )
+////            if( e.getActionCommand() == "step" )
 ////            {
-////                sudukoMain.Step();
+////                sudokuSolver.executeStep();
 ////                setHistoryButtonEnables();
 ////            }
 ////            else
@@ -257,16 +261,16 @@ public class DlgSelectPuzzle extends JDialog implements ActionListener
 ////        }
 ////        else if( hintButton.equals( e.getSource() ) )
 ////        {
-////            sudukoMain.Hint();
+////            sudokuSolver.displayHint();
 ////        }
 ////        else if( backButton.equals( e.getSource() ) )
 ////        {
-////            sudukoMain.Back();
+////            sudokuSolver.moveBackInHistory();
 ////            setHistoryButtonEnables();
 ////        }
 ////        else if( forwardButton.equals( e.getSource() ) )
 ////        {
-////            sudukoMain.Forward();
+////            sudokuSolver.moveForwardInHistory();
 ////            setHistoryButtonEnables();
 ////        }
 ////        else if( possiblesCheckbox.equals( e.getSource() ))

@@ -13,10 +13,10 @@ public class Main
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static Logger  logger = Logger.getLogger( "sudoku" );
+	public  static final Logger logger = Logger.getLogger( "sudoku" );
 	
-	private SudokuGUI     sudokuGui;
-	private SudokuPanel   sudokuPanel;
+	private SudokuGUI    sudokuGui;
+	private SudokuPanel  sudokuPanel;
 	
 	public static void main(String[] args) 
 	{
@@ -118,7 +118,7 @@ public class Main
         return( sudokuGui );
     }
 
-	class MyFormatter extends Formatter
+	static class MyFormatter extends Formatter
 	{
 		
 		public MyFormatter() 

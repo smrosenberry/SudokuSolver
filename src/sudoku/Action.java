@@ -27,11 +27,11 @@ public class Action
             sudokuPanel.setCellValue( cell, value, false, HintType.NONE );
             break;
             
-//        case REMOVE_POSSIBLE_VALUE:
+        case REMOVE_POSSIBLE_VALUE:
 //            Main.logger.info( "    Action.reverse(): restore possible value cell[" + cell.getRow() + "][" + cell.getCol() + "]  actionType[" + action + "] value[" + value + "]" );
 //            cell.addPossibleValue( value );
-//            break;
-//        
+            break;
+
         }
         
     }

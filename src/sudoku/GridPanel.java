@@ -185,6 +185,8 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
 			hintRect = (Rectangle)getCellInSameSquare( hintCell, 0 ).getDisplayRectangle().clone();
 			hintRect.add( getCellInSameSquare( hintCell, gridCells.width-1 ).getDisplayRectangle() );
 			break;
+        case NONE:
+            return;
 		}
 
 	    Color  orgColor  = g2.getColor();
@@ -216,6 +218,8 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
     		case SQUARE:
     			cellSet = getSquareSetWithCell( hintCell );
     			break;
+            case NONE:
+                return;
     		}
     		
     		if( cellSet != null )
@@ -348,6 +352,9 @@ class GridPanel extends SudokuPanel implements MouseListener, KeyListener, Actio
     			bKeyProcessed = true;
     		}
     		break;
+
+        default:
+            break;
     		
     	} // switch( keyEvent.getKeyCode() )
     	

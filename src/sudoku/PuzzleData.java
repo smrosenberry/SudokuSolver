@@ -27,7 +27,7 @@ class PuzzleData
     
         for( PuzzleDifficulty difficulty : PuzzleDifficulty.values() )
         {
-            if( difficulty.strValue == strValue )
+            if( difficulty.strValue.equals( strValue ) )
             {
                 return( difficulty );
             }

@@ -50,7 +50,7 @@ public class SudokuSolver
 	public void executeStep()
 	{
 		logger.finer( "actionPerformed: step" );
-		StepType solutionStep = sudokuPanel.stepSolution( true );
+		StepType solutionStep = sudokuPanel.stepSolution( SudokuPanel.DO_SOLUTION_STEP );
 		sudokuPanel.setHintLevel( HintLevel.NONE );
 		sudokuGui.setLastStrategyText( solutionStep.stepString() ); 
 		sudokuGui.setLastStrategyVisible( true );
@@ -62,7 +62,7 @@ public class SudokuSolver
 		if( sudokuPanel.getHintLevel().isEmpty() )
 		{
 
-			StepType solutionStep = sudokuPanel.stepSolution( false );
+			StepType solutionStep = sudokuPanel.stepSolution( SudokuPanel.DO_HINT_STEP );
 			sudokuGui.setLastStrategyText( solutionStep.hintString() );
 			
 			if( solutionStep != StepType.NO_POSSIBLE_SOLUTION_STEP )

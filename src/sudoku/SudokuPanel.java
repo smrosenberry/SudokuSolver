@@ -121,7 +121,12 @@ class SudokuPanel extends JPanel
 		
 	}
 
-	// TODO -- public statics for true/false
+	//
+    // boolean values for use with stepSolution
+    //
+	public static boolean DO_SOLUTION_STEP = true;
+	public static boolean DO_HINT_STEP     = false;
+
 	public StepType stepSolution( boolean bSolutionStep )
 	{
 		

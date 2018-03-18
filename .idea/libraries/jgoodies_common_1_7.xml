@@ -2,11 +2,14 @@
   <library name="jgoodies-common-1.7">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/src/jgoodies-common-1.7.0" />
-      <root url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/src/jgoodies-common-1.7.0/docs/api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/jgoodies-common-1.7.0" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/src/jgoodies-common-1.7.0" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/src/jgoodies-common-1.7.0" recursive="false" type="SOURCES" />
   </library>
 </component>

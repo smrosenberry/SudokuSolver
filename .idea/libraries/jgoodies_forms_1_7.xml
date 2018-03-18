@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="jgoodies-forms-1.7">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2/docs/api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/src/jgoodies-forms-1.7.2" recursive="false" type="SOURCES" />
+  </library>
+</component>

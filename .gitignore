@@ -1,0 +1,9 @@
+# Compiled source #
+###################
+*.com
+*.class
+
+# Special Cases   #
+###################
+.idea/workspace.xml
+.idea/dictionaries

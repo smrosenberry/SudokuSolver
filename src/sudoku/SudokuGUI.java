@@ -10,7 +10,6 @@ import javax.swing.*;
 
 import com.jgoodies.forms.layout.*;
 
-// TODO Fix use of "==" for strings.  Works but is in poor style.
 public class SudokuGUI implements ActionListener, FocusListener
 {
 	
@@ -29,20 +28,6 @@ public class SudokuGUI implements ActionListener, FocusListener
     private JButton    backButton            = new JButton  ( "Back"     );
     private JButton    forwardButton         = new JButton  ( "Forward"  );
 
-	enum cols 
-	{ 	ZEROCOL, LS, COL1, LCS, COL2, RCS, COL3, RS;
-		public static int first () { return( COL1.ordinal() ); }
-		public static int middle() { return( COL2.ordinal() ); }
-		public static int last  () { return( COL3.ordinal() ); }
-	};
-	
-	enum rows 
-	{ 	ZEROROW, TS, ROW1, UCS, ROW2, LCS, ROW3, BS;
-		public static int first () { return( ROW1.ordinal() ); }
-		public static int middle() { return( ROW2.ordinal() ); }
-		public static int last  () { return( ROW3.ordinal() ); }
-	};
-	
 	public SudokuGUI( SudokuSolver sudokuSolver  /*, int[][] inputValues */ )
 	{
 		
@@ -111,22 +96,21 @@ public class SudokuGUI implements ActionListener, FocusListener
 	public void actionPerformed( ActionEvent e ) 
 	{
 
-		// TODO -- convert to switch statement
 		if( stepButton.equals( e.getSource() ) )
 		{
-			if( e.getActionCommand() == "Step" )
+			switch( e.getActionCommand() )
 			{
-				sudokuSolver.executeStep();
-				setButtonEnables();
-			}
-			else if( e.getActionCommand() == "Start" )
-            {
-			    changeStartButtonToStepButton();
-			    setButtonEnables();
-            }
-			else
-			{
-				stepButton.setEnabled( false );
+            case "Step":
+                sudokuSolver.executeStep();
+                setButtonEnables();
+                break;
+            case "Start":
+                changeStartButtonToStepButton();
+                setButtonEnables();
+                break;
+            default:
+                stepButton.setEnabled( false );
+                break;
 			}
 		}
 		else if( hintButton.equals( e.getSource() ) )
@@ -158,9 +142,9 @@ public class SudokuGUI implements ActionListener, FocusListener
 
 	public void setButtonEnables()
     {
-        backButton.setEnabled( topPanel.getHistoryIdx() > 0 );
+        backButton   .setEnabled( topPanel.getHistoryIdx() > 0 );
         forwardButton.setEnabled( topPanel.getHistoryIdx() < topPanel.getNumberOfSolutionSteps() );
-        hintButton.setEnabled( stepButton.getText() == "Step" );
+        hintButton   .setEnabled( stepButton.getText().equals( "Step" ) );
     }
 
     public GridPanel getSudokuPanel()
@@ -227,4 +211,5 @@ public class SudokuGUI implements ActionListener, FocusListener
         topPanel.clearSolutionSteps();
         setButtonEnables();
     }
+
 }

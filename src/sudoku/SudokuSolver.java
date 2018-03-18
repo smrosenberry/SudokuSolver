@@ -31,7 +31,9 @@ public class SudokuSolver
     public void solveSudoku()
     {
 
-        initializeLogging( Level.FINEST );
+        initializeLogging( Level.FINEST,
+                           MyFormatter.LOG_TIMESTAMP,
+                           MyFormatter.LOG_LEVEL );
 
         sudokuGui = new SudokuGUI( this );
 
@@ -108,7 +110,9 @@ public class SudokuSolver
         return( sudokuGui );
     }
 
-    private void initializeLogging( Level loggingLevel )
+    private void initializeLogging( Level    loggingLevel,
+                                    boolean  bIncludeTimestamp,
+                                    boolean  bIncludeLoggingLevel )
     {
 
         //
@@ -117,37 +121,87 @@ public class SudokuSolver
         logger.setLevel( loggingLevel );
 
         //
+        // Get myFormatter for handlers to use.
+        //
+        MyFormatter myFormatter = new MyFormatter( bIncludeTimestamp,
+                                                   bIncludeLoggingLevel );
+
+        //
         // Establish MyFormatter for all logging handlers.
         //
         for( Handler handler : logger.getParent().getHandlers() )
         {
             handler.setLevel( loggingLevel );   // appears logging level must be set on each handler as well
-            handler.setFormatter( new MyFormatter() );
+            handler.setFormatter( myFormatter );
         }
 
     }
 
-    // TODO -- support options in MyFormatter to enable/disable logging date and level
     static class MyFormatter extends Formatter
     {
 
-        public MyFormatter()
+        static final boolean LOG_TIMESTAMP       = true;
+        static final boolean NO_TIMESTAMP_IN_LOG = false;
+        boolean  bIncludeTimestamp;
+
+        static final boolean LOG_LEVEL       = true;
+        static final boolean NO_LEVEL_IN_LOG = false;
+        boolean  bIncludeLoggingLevel;
+
+        public MyFormatter( boolean  bIncludeTimestamp,
+                            boolean  bIncludeLoggingLevel )
         {
             super();
+            this.bIncludeTimestamp    = bIncludeTimestamp;
+            this.bIncludeLoggingLevel = bIncludeLoggingLevel;
         }
 
         public String format( LogRecord rec )
         {
-            StringBuffer buf = new StringBuffer(1000);
-            buf.append(new java.util.Date());
-            buf.append(' ');
-            buf.append(rec.getLevel());
-            buf.append(' ');
-            buf.append(formatMessage(rec));
-            buf.append('\n');
-            return buf.toString();
-        }
-    }
 
+            StringBuffer buf = new StringBuffer(1000 );
+
+            if( bIncludeTimestamp )
+            {
+                buf.append( new java.util.Date() );
+                buf.append( "  " );
+            }
+
+            if( bIncludeLoggingLevel )
+            {
+                buf.append( rec.getLevel() );
+                //
+                // The value 8 is empirically determined from the longest string for possible values of Level
+                // plus 2 for spacing to the message.
+                //
+                buf.append( getSpacer( rec.getLevel().toString(), 9 ) );
+            }
+
+            buf.append( formatMessage( rec ) );
+            buf.append( '\n' );
+
+            return( buf.toString() );
+
+        }
+
+        //
+        // Get a string of space characters that would pad existingString to
+        // the nRequiredCharacters.
+        //
+        String getSpacer( String existingString, int nRequiredChars )
+        {
+
+            StringBuffer spacer = new StringBuffer( nRequiredChars );
+
+            for( int n = existingString.length(); n < nRequiredChars; n++ )
+            {
+                spacer.append( ' ' );
+            }
+
+            return( spacer.toString() );
+
+        }
+
+    }
 
 }

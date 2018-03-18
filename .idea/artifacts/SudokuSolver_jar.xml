@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SudokuSolver:jar">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="SudokuSolver.jar">
+      <element id="module-output" name="SudokuSolver" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-common-1.7.0/jgoodies-common-1.7.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-common-1.7.0/jgoodies-common-1.7.0-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-common-1.7.0/jgoodies-common-1.7.0-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-common-1.7.0/jgoodies-common-1.7.0-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-forms-1.7.2/jgoodies-forms-1.7.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-forms-1.7.2/jgoodies-forms-1.7.2-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-forms-1.7.2/jgoodies-forms-1.7.2-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/jgoodies-forms-1.7.2/jgoodies-forms-1.7.2-sources.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

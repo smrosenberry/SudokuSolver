@@ -21,7 +21,7 @@ public class SudokuGUI implements ActionListener, FocusListener
     private FormLayout layout                = new FormLayout();
     private JPanel     bottomPanel           = new JPanel( layout );
     private JLabel     lastStrategyUsedLabel = new JLabel   ("");
-    private JCheckBox  possiblesCheckbox     = new JCheckBox( "Display Possible Values" );
+    private JCheckBox  possiblesCheckbox     = new JCheckBox( "Display Possible Numbers" );
     private JCheckBox  singleStepCheckbox    = new JCheckBox( "Single Step Solution" );
     private JButton    hintButton            = new JButton  ( "Hint"     );
     private JButton    stepButton            = new JButton  ( "Step"     );

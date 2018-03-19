@@ -1,4 +1,4 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,8 +9,6 @@ import javax.swing.*;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.*;
-
-import sudoku.PuzzleData.PuzzleDifficulty;
 
 
 @SuppressWarnings( "serial" )
@@ -58,7 +56,7 @@ public class DlgSelectPuzzle extends JDialog implements ActionListener
         int row = 2;
         int col = 2;
         layout.appendRow( RowSpec.decode( "8dlu:grow" ) );  // top space
-        for( PuzzleDifficulty difficulty : PuzzleDifficulty.values() )
+        for( PuzzleData.PuzzleDifficulty difficulty : PuzzleData.PuzzleDifficulty.values() )
         {
             
             layout.appendRow( RowSpec.decode( "pref" ) );
@@ -164,16 +162,16 @@ public class DlgSelectPuzzle extends JDialog implements ActionListener
         
         logger.fine( "DlgSelectPuzzle.actionPerformed(): actionCommand[" + e.getActionCommand() + "]" );
         
-        puzzleDifficulty = PuzzleDifficulty.getValue( e.getActionCommand() );
+        puzzleDifficulty = PuzzleData.PuzzleDifficulty.getValue( e.getActionCommand() );
 
         setVisible( false ); 
         dispose(); 
         
     }
     
-    private PuzzleDifficulty puzzleDifficulty = PuzzleDifficulty.EVIL;
+    private PuzzleData.PuzzleDifficulty puzzleDifficulty = PuzzleData.PuzzleDifficulty.EVIL;
     
-    public PuzzleDifficulty getSelectedPuzzle()
+    public PuzzleData.PuzzleDifficulty getSelectedPuzzle()
     {
         return( puzzleDifficulty );
     }

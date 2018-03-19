@@ -1,4 +1,4 @@
-package sudoku;
+package com.sudoku_solver;
 
 
 //

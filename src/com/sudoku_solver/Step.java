@@ -1,9 +1,9 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.util.*;
 import java.util.logging.Logger;
 
-import sudoku.Action.*;
+import com.sudoku_solver.Action.*;
 
 public class Step
 {

@@ -1,9 +1,9 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.awt.*;
 import java.util.*;
 
-import sudoku.Action.ActionType;
+import com.sudoku_solver.Action.ActionType;
 
 
 class Cell

@@ -1,8 +1,6 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.util.logging.*;
-
-import sudoku.PuzzleData.*;
 
 
 public class SudokuSolver
@@ -10,7 +8,7 @@ public class SudokuSolver
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger logger = Logger.getLogger( "sudoku" );
+    private static final Logger logger = Logger.getLogger("com/sudoku_solver");
     public static Logger getLogger() { return( logger ); }
 
     private SudokuGUI    sudokuGui;
@@ -31,7 +29,7 @@ public class SudokuSolver
     public void solveSudoku()
     {
 
-        initializeLogging( Level.FINEST,
+        initializeLogging( Level.INFO,
                            MyFormatter.LOG_TIMESTAMP,
                            MyFormatter.LOG_LEVEL );
 
@@ -39,7 +37,7 @@ public class SudokuSolver
 
         DlgSelectPuzzle dlg = new DlgSelectPuzzle( sudokuGui.getFrame() );
 
-        PuzzleDifficulty puzzleDifficulty = dlg.getSelectedPuzzle();
+        PuzzleData.PuzzleDifficulty puzzleDifficulty = dlg.getSelectedPuzzle();
 
         sudokuPanel = sudokuGui.getSudokuPanel();
 

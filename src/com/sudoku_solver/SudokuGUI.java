@@ -1,4 +1,4 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

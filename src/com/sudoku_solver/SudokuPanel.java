@@ -1,12 +1,9 @@
-package sudoku;
+package com.sudoku_solver;
 
 import java.awt.*;
 import java.util.*;
 import java.util.logging.Logger;
 import javax.swing.*;
-
-import sudoku.Action.ActionType;
-import sudoku.PuzzleData.PuzzleDifficulty;
 
 class SudokuPanel extends JPanel 
 {
@@ -551,7 +548,7 @@ class SudokuPanel extends JPanel
                             if( cell2.removePossibleValue( value ) )
                             {
                                 logger.finer( "RowCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
-                                currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                                currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                                 rc = true;
                                 if( bSingleStep || !bSolutionStep )
                                 {
@@ -665,7 +662,7 @@ class SudokuPanel extends JPanel
                             if( cell2.removePossibleValue( value ) )
                             {
                                 logger.finer( "ColCheck: Removed possible value[" + value + "] from cell["+cell2.getCol()+","+cell2.getCol()+"]" );
-                                currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                                currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                                 rc = true;
                                 if( bSingleStep || !bSolutionStep )
                                 {
@@ -778,7 +775,7 @@ class SudokuPanel extends JPanel
                             if( cell2.removePossibleValue( value ) )
                             {
                                 logger.finer( "SquareCheck: Removed possible value[" + value + "] from cell["+cell2.getRow()+","+cell2.getCol()+"]" );
-                                currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                                currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                                 rc = true;
                                 if( bSingleStep || !bSolutionStep )
                                 {
@@ -805,10 +802,10 @@ class SudokuPanel extends JPanel
         
     }
 
-    public void initCellValues( PuzzleDifficulty puzzleDifficulty )
+    public void initCellValues( PuzzleData.PuzzleDifficulty puzzleDifficulty )
     {
 
-        if( puzzleDifficulty == PuzzleDifficulty.EMPTY )
+        if( puzzleDifficulty == PuzzleData.PuzzleDifficulty.EMPTY )
         {
             sudokuGui.changeStepButtonToStartButton();
         }
@@ -961,7 +958,7 @@ class SudokuPanel extends JPanel
             {
                 if( currentStep != null )
                 {
-                    currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                    currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                 }
             }
         }
@@ -975,7 +972,7 @@ class SudokuPanel extends JPanel
             {
                 if( currentStep != null  )
                 {
-                    currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                    currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                 }
             }
         }
@@ -989,7 +986,7 @@ class SudokuPanel extends JPanel
             {
                 if( currentStep != null  )
                 {
-                    currentStep.addAction( cell2, ActionType.REMOVE_POSSIBLE_VALUE, value );
+                    currentStep.addAction( cell2, Action.ActionType.REMOVE_POSSIBLE_VALUE, value );
                 }
             }
         }
